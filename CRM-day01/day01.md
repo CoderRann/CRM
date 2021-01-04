@@ -151,3 +151,59 @@ s1为一个对象，s2为一个对象，
 **如图**
 
 ![](3.png)	
+
+## 2.9 前后端传值的方式
+
+* 前端为后端传值，一般叫做传参数
+	ajax url 
+
+后台一律使用String value = request.getParameter(key)的形式来接收参数
+
+  * 特殊形似:同一个key下有多个value,如执行批量删除操作
+	  * string ids[] = request.getParameterValues("id");
+	  
+![](4.png)	
+
+## 2.10 Servlet模板模式应用
+
+在实际项目开发中，所谓的同事间的交流的设计模式，普遍指的是基于GoF的23种设计模式
+
+* 代理模式
+* 单例模式
+* 模板模式
+	* 它的功能是将程序执行的流程或者算法的骨架搭建出来，具体的实现方式交给方法去做
+
+
+## 2.11 UUID的应用
+
+**主键**: int/bigint 以前为什么使用整形? 因为整形能够自动递增
+
+如 insert into table(name,age)value(?,?)会自动帮我们递增id主键
+
+在实际开发中，很少使用整形设计。就是因为自动递增的问题(数据库会在查询最大数然后自动递增，效率低)
+
+* 实际开发中，使用字符串当做主键字段类型比较多
+
+ *主键: 确保**非空+唯一**
+	
+	可以使用UUID创建主键，我们会生成一组由数字字母以及横杠所组成的随机串，这个随机串有36位，这个随机串一定是全世界唯一的
+
+	import java.util.UUID;
+
+	public class Test1{
+		psvm{
+			UUID uuid = UUID.randomUUID();
+        	String str = uuid.toString();
+        	str.split("-");
+        	str.replaceAll("-","");
+		}
+	}
+
+* 为什么UUID是全世界唯一的?
+	* 随机数
+	* 时间
+	* 硬件自身出厂机器编码
+	
+* 在数据库中，UUID生成的主键应使用什么类型
+	* varchar():变长
+	* char(32):定长 使用定长char效率高，对sql优化好 
