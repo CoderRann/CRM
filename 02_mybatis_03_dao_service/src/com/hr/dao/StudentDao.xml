@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:命名空间用于区分不同的mapper文件
+        不同的mapper映射文件所使用的namespace的命名不允许重复
+-->
+<mapper namespace="com.hr.dao.StudentDao">
+    <!--
+    sql语句必须写在相应标签中
+       <insert>...
+
+       parameterType:为sql语句传递的参数 如本例中的id类型
+       resultType:sql语句返回的结果
+       我们之前的jdbc返回的是 ResultSet结果集对象
+        ResultSet rs = sql语句
+        Student  s = new Student();
+        if(rs.next()){
+            s.setId(rs.getString(1));
+            s.setNamed(rs.getString(2));
+            s.setAge(rs.getId(3));
+         }
+        现在直接自动创建对象
+            student s = sql语句
+
+
+         #{id} 等价于 ?
+    -->
+
+    <select id="getById" parameterType="java.lang.String" resultType="com.hr.domain.Student">
+        select * from tbl_stu where id = #{id}
+    </select>
+
+   <insert id="save">
+       insert into tbl_stu(id,name,age) values (#{id},#{name},#{age})
+   </insert>
+
+    <select id="getAll" resultType="com.hr.domain.Student">
+        select * from  tbl_stu
+    </select>
+</mapper>

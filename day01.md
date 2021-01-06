@@ -207,3 +207,6 @@ s1为一个对象，s2为一个对象，
 * 在数据库中，UUID生成的主键应使用什么类型
 	* varchar():变长
 	* char(32):定长 使用定长char效率高，对sql优化好 
+
+
+* 创建sqlmapper映射文件XxxMapper.xml(实体类名字)用于写sql语句
