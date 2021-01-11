@@ -200,6 +200,7 @@ source code: 02_mybatis_01
 ![](8.png)
 
 ### 4.2 settings 全局配置参数
+
 Mybaits框架运行设置一些全局配置参数，比如：开启二级缓存，配置查询延迟加载策略等等...
 
  	<settings>
