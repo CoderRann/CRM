@@ -88,7 +88,7 @@ MyBatis是一个持久层框架，几乎对所有的数据库操作进行了封�
 	         }
 	        现在直接自动创建对象
 	            student s = sql语句
-	         #{id} 等价于 ?
+	          	#{id} 等价于 ?
 	    -->
 	
 	    <select id="getById" parameterType="java.lang.String" resultType="com.hr.domain.Student">
