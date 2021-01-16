@@ -254,3 +254,44 @@ Mybaits框架运行设置一些全局配置参数，比如：开启二级缓存�
 	    <!--   指定哪个对象的方法触发一次延迟加载。  -->  
 	      <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>  
 	    </settings>  
+
+### 4.4 typeAliases
+	为mapper映射文件中的resultType等Type起别名
+
+* 1.为指定的类分别起别名，别名的命名由我们自己来决定
+	* type:要为那个domain起别名 填写包.类名称
+	* alias:别名的名字
+	
+      		< typeAlias type="com.hr.domian.student" alias="stu"/>
+* 2.使用package标签批量起别名
+	* 别名是mybatis默认为我们取好的，别名为我们的类名(不区分大小写)
+	* name:指定一个包
+
+			< typeAlias name="com.hr.domian.student"/>
+
+### 4.5 <mapper>映射文件注册方式
+* 1.使用ressource属性，指定mapper映射文件
+	
+		<mappers>
+        	<mapper resource="com/hr/dao/StudentDao.xml"/>
+    	</mappers>
+* 2.使用class属性，找到dao层接口的全路径
+		
+		<mappers>
+        	<mapper class="com.hr.dao.StudentDao"/>
+    	</mappers>
+* 3.package**标签**批量注册
+	* name属性:指向dao包，dao包下的所有mapper映射文件自动注册
+		<mappers>
+        	<package name="com.hr.dao"/>
+    	</mappers>
+
+### 4.6 mapper映射文件解析
+* 1.parameterType
+	* 设置参数类型
+	parameterType用于设置输入参数的java类型。parameterType的值为参数类型的java类型或者别名，Sql语句获取参数的值使用#{}或者${}。使用时可省略。
+		* （1）使用简单数据类型(8种基本数据类型+String)为参数
+        * （2）使用引用数据类型为参数
+		* （3）使用map为参数
+
+**注意**:不可以同时为sql语句传递多个参数，如果要为sql语句传递多个参数，我们应该将多个参数封装到一个domain对象中,如student对象中的name，age...或者是打包到一个map集合中
