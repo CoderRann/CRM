@@ -295,3 +295,33 @@ Mybaits框架运行设置一些全局配置参数，比如：开启二级缓存�
 		* （3）使用map为参数
 
 **注意**:不可以同时为sql语句传递多个参数，如果要为sql语句传递多个参数，我们应该将多个参数封装到一个domain对象中,如student对象中的name，age...或者是打包到一个map集合中去
+
+### 4.7 #{}与${}
+
+* #{}表示占位符，可以有效防止sql注入，使用无需考虑参数类型
+* ${}表示拼接符，无法防止sql注入，需要考虑参数类型 '${value}'
+
+### 4.8 resultType类型
+当执行了sql语句之后，通过查询得到的结果 id name age，根据返回值类型会自动创建该类型的对象，由该对象进行封装起来，**一条记录一个对象**,系统会自动创建一个list集合来保存这些对象
+
+* 返回map类型
+当执行了sql语句之后，通过查询得到的结果 id name age，根据返回值类型会创建该类型的对象，由该map对象将查询结果保持到map中
+	
+		Map<String,Object> map1 = new HashMap<>();
+		map1.put("id","A0001");
+		map1.put("age",23);
+		...
+	list保存多个map对象
+
+	LIst<Map<String,Object>> maplist = studentDao.select();
+
+	* 使用domain封装不了，使用map来保存结果
+	例如:
+		根据姓名分组，查询每一个姓名对应的数量，domain中没有count(*)属性
+
+## 5.like模糊查询案例
+	
+* sql语句中" "空格相当于+拼接
+### 5.1使用#{}
+ 	UPDATE tbl_stu SET equals_nearly = "false" where name not like concat(concat('%',#{name}),'%');
+	UPDATE tbl_stu SET equals_nearly = "true" where name like '%' #{name} '%';
