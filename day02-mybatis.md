@@ -319,6 +319,27 @@ Mybaits框架运行设置一些全局配置参数，比如：开启二级缓存�
 	例如:
 		根据姓名分组，查询每一个姓名对应的数量，domain中没有count(*)属性
 
+
+### 4.9当数据库表字段(fullname)与domain类属性名(name)不一致的时处理(尽量保持一致)
+	数据库查询的记录无法插入封装到domain对应的属性中
+#### 4.9.1 起别名
+	select id,fullname as name from table_stu;
+#### 4.9.2 标签resultMap
+	标签resultMap用于domain与数据库表字段建立一对一映射关系
+	<resultMap id="stuMap" type="Student">
+		<!--
+			id标签用于配置主键对应关系
+			result标签用来配置普通字段对应关系
+		-->
+		<id property="id" colume="id"/>
+		<result property="name" column="fullname"/>
+		<result property="age" column="age"/>
+	<resultMap>
+
+
+	<select id="xxx" resultMap="stuMap">
+		select id, fullname,age from tb1_stu;
+	<select/>
 ## 5.like模糊查询案例
 	
 * sql语句中" "空格相当于+拼接
