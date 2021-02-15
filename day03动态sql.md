@@ -63,4 +63,4 @@ foreach标签中可以接收数组数据类型
 			</select>
 	
 ### 3.sql片段的使用
-	使用sql标签制作sql片段
+	使用sql标签制作sql片段.
