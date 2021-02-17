@@ -63,4 +63,56 @@ foreach标签中可以接收数组数据类型
 			</select>
 	
 ### 3.sql片段的使用
-	使用sql标签制作sql片段.
+	
+使用sql标签制作sql片段.<sql id=" "> 
+	
+* 作用:用来代替sql语句中的某些代码	
+如果你的mapper映射文件中的某些代码出现了大量的重复，我们可以使用sql片段来代替他们
+* 举例
+	
+		<sql id="sql1">
+			select * from tb1_stu;
+		</sql>
+		
+		<select id="select" resultType="Student">
+			<include refid="sql1"/> where id=#{id}
+		</select>
+
+### 4.多表联查
+多表联查案例
+关联学生表和班级表
+
+* 1)查询出学生姓名和班级名称
+	
+	**注意**set无序不重复集合
+
+		List<Map<String, Object>> mapList = studentDao.selectDuo();
+        for (Map<String, Object> map:
+             mapList) {
+            Set<String> set = map.keySet();
+
+            for (String key:set
+                 ) {
+                System.out.println("key: "+key);
+                System.out.println("value: "+map.get(key));
+            }
+            System.out.println("------------------------------------");
+        }
+
+  		<select id ="selectDuo" resultType="map">
+        	select
+       	 	s.name as sname,
+        	c.name as cname
+        	from tbl_stu s
+        	join tb1_classroom c
+        	on s.classroomid = c.id
+    	</select>
+
+* 2)查询出学生和班级所有信息，使用VO(Value object)类
+	
+	如果需要为前端展现的数据，使用一个domain类型不足以表现出来这些数据，我们可以考虑
+	* map
+	* VO
+	
+	vo指的是创建出来的一个类，这个类的属性是完全由我们自己定义,且不需要像domain一样完全取相同的名字
+
