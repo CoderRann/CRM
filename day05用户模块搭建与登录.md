@@ -87,3 +87,9 @@
 			* expireTime 失效时间
 			* LockState 锁定状态
 			* allowIps 验证ip地址是否有效 
+			
+### 2.3 登录流程
+* 时序图:用来描绘从浏览器到
+![](19.png)
+![](18.png)
+### 2.4 修改html页面jsp
