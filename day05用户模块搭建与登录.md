@@ -94,4 +94,12 @@
 ![](18.png)
 
 
-### 2.4 修改html页面jsp
+###
+* url-pattern
+
+	* /abc/myServlet.do
+ 	* /abc/*
+ 	* /*
+ 	* *.do
+ 	* /abc/*.do **错误**
+ 	* /*.do **错误**
